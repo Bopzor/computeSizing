@@ -62,11 +62,19 @@ const getSizingFromNumberOfWeeks = (numberOfWeeks: number): Size => {
   return actualSize;
 };
 
+const getRandomSizing = () => {
+  const sizes = Object.keys(sizingToWeeks);
+
+  return sizes[Math.floor(Math.random() * sizes.length)];
+};
+
 const App: Component = () => {
   const [size, setSize] = createSignal('');
   const [error, setError] = createSignal('');
   const [minComputedSize, setMinComputedSize] = createSignal('');
   const [maxComputedSize, setMaxComputedSize] = createSignal('');
+
+  const [randomSizing, setRandomSizing] = createSignal();
 
   const handleSetSignal = (value: string) => {
     setSize(value);
@@ -139,6 +147,21 @@ const App: Component = () => {
               <SizeComponent size={minComputedSize() as Size} />
             </div>
           </Show>
+        </Show>
+      </div>
+
+      <div class="flex items-center justify-center gap-4">
+        <button
+          class="text border-2 border-blue-800 hover:bg-blue-800/10 rounded-lg p-2 transition-all duration-300 ease-in-out"
+          onClick={() => setRandomSizing(getRandomSizing())}
+        >
+          Give me a sizing!
+        </button>
+
+        <Show when={randomSizing()} fallback={<div class="size-9" />}>
+          <div>
+            <SizeComponent size={randomSizing() as Size} />
+          </div>
         </Show>
       </div>
     </div>
