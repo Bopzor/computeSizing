@@ -86,7 +86,7 @@ const App: Component = () => {
       setMinComputedSize(computedSizes.sizeMin);
       setMaxComputedSize(computedSizes.sizeMax);
     } else {
-      setError('Invalid formatting');
+      setError('Invalid format');
     }
   };
 
@@ -135,7 +135,9 @@ const App: Component = () => {
               </div>
             }
           >
-            <SizeComponent size={minComputedSize() as Size} />
+            <div class="mt-4">
+              <SizeComponent size={minComputedSize() as Size} />
+            </div>
           </Show>
         </Show>
       </div>
